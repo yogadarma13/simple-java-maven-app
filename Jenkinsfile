@@ -12,6 +12,15 @@ node {
                 junit 'target/surefire-reports/*.xml'
             }
         }
+        stage('Manual Approval') {
+            try {
+                input(message: 'Lanjutkan ke tahap Deploy?')
+                echo 'Next To Deploy Stage'
+            } catch (e) {
+                echo 'Approval denied'
+                return
+            }
+        }
         stage('Deploy') {
             sh './jenkins/scripts/deliver.sh'
             sleep 60
