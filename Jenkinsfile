@@ -18,6 +18,7 @@ node {
                 echo 'Next To Deploy Stage'
             } catch (e) {
                 echo 'Approval denied'
+                sh 'exit 1'
                 return
             }
         }
